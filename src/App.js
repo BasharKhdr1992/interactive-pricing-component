@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import Pricing from './components/Pricing';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="wrapper">
+      <div className="header">
+        <h1>Simple, traffic-based pricing</h1>
+        <p>Sign-up for our 30-day trial. No credit card required</p>
+      </div>
+      <Pricing />
+      <div className="footer">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Interactive Pricing Component - A Frontendmentor challenge - developed
+          by Bashar Khdr
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
