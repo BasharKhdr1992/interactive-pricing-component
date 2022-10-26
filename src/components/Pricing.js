@@ -4,28 +4,32 @@ import Check from "../assets/icon-check.svg";
 import "./Pricing.css";
 import Price from "./Price";
 
+const pageViews = [0, 10000, 50000, 100000, 500000, 1000000];
+
 const Pricing = () => {
-  const [pageViews, setPageViews] = useState(0);
+  const [pageViewsIndex, setPageViewsIndex] = useState(0);
   const [yearlyFees, setYearlyFees] = useState(false);
   const [discountMsg, setDiscountMsg] = useState("25 % discount");
   const [collapse, setCollapse] = useState(false);
 
   const MIN = 0,
-    MAX = 1000;
+    MAX = 5;
 
   const handleRangeChange = (e) => {
-    setPageViews(+e.target.value * 1000);
+    setPageViewsIndex(+e.target.value);
   };
 
   let monthlyFees;
 
-  if (pageViews <= 10000) {
+  let pageViewsValue = pageViews[pageViewsIndex];
+
+  if (pageViewsValue <= 10000) {
     monthlyFees = 8;
-  } else if (pageViews > 10000 && pageViews <= 50000) {
+  } else if (pageViewsValue > 10000 && pageViewsValue <= 50000) {
     monthlyFees = 12;
-  } else if (pageViews > 50000 && pageViews <= 100000) {
+  } else if (pageViewsValue > 50000 && pageViewsValue <= 100000) {
     monthlyFees = 16;
-  } else if (pageViews > 100000 && pageViews <= 500000) {
+  } else if (pageViewsValue > 100000 && pageViewsValue <= 500000) {
     monthlyFees = 24;
   } else {
     monthlyFees = 36;
@@ -36,7 +40,7 @@ const Pricing = () => {
   };
 
   const getGradient = () => {
-    return ((pageViews / 1000 - MIN) / (MAX - MIN)) * 100;
+    return ((pageViewsIndex - MIN) / (MAX - MIN)) * 100;
   };
 
   const rangeBarStyle = {
@@ -69,7 +73,9 @@ const Pricing = () => {
   return (
     <div className="pricing-component" role="main">
       <div className="pricing-info">
-        <div className="page-views">{`${pageViews}k`} pageviews</div>
+        <div className="page-views">
+          {`${pageViews[pageViewsIndex]}k`} pageviews
+        </div>
         {!collapse && (
           <Price yearlyFees={yearlyFees} monthlyFees={monthlyFees} />
         )}
@@ -80,9 +86,9 @@ const Pricing = () => {
           style={rangeBarStyle}
           onChange={handleRangeChange}
           min={MIN}
-          step={250}
+          step={1}
           max={MAX}
-          value={pageViews / 1000}
+          value={pageViewsIndex}
           className="range"
         />
       </div>
