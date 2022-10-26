@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import ToggleButton from '../UI/ToggleButton';
-import Check from '../assets/icon-check.svg';
-import './Pricing.css';
-import Price from './Price';
+import React, { useState, useEffect } from "react";
+import ToggleButton from "../UI/ToggleButton";
+import Check from "../assets/icon-check.svg";
+import "./Pricing.css";
+import Price from "./Price";
 
 const Pricing = () => {
   const [pageViews, setPageViews] = useState(0);
   const [yearlyFees, setYearlyFees] = useState(false);
-  const [discountMsg, setDiscountMsg] = useState('25 % discount');
+  const [discountMsg, setDiscountMsg] = useState("25 % discount");
   const [collapse, setCollapse] = useState(false);
 
   const MIN = 0,
@@ -48,9 +48,9 @@ const Pricing = () => {
     const innerW = e.currentTarget.innerWidth;
 
     if (innerW < 1200) {
-      setDiscountMsg('-25 %');
+      setDiscountMsg("-25 %");
     } else {
-      setDiscountMsg('25 % discount');
+      setDiscountMsg("25 % discount");
     }
 
     if (innerW < 1000) {
@@ -61,9 +61,9 @@ const Pricing = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', updatePage);
+    window.addEventListener("resize", updatePage);
 
-    return () => window.removeEventListener('resize', updatePage);
+    return () => window.removeEventListener("resize", updatePage);
   });
 
   return (
@@ -80,6 +80,7 @@ const Pricing = () => {
           style={rangeBarStyle}
           onChange={handleRangeChange}
           min={MIN}
+          step={250}
           max={MAX}
           value={pageViews / 1000}
           className="range"
